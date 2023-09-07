@@ -1,5 +1,10 @@
 ## HEAD
 
+## 0.18.0 / 2023-09-17
+
+  * Integrate Webfeeds for better Feedly integration
+  * Provide a template configuration option to overwrite feed.xml template
+
 ### Development Fixes
 
   * Upgrade to Rake 13 to fix master (#381)

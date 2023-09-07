@@ -2,21 +2,21 @@
 
 A Jekyll plugin to generate an Atom (RSS-like) feed of your Jekyll posts
 
-[![Continuous Integration](https://github.com/jekyll/jekyll-feed/actions/workflows/ruby.yml/badge.svg)](https://github.com/jekyll/jekyll-feed/actions/workflows/ruby.yml) [![Gem Version](https://badge.fury.io/rb/jekyll-feed.svg)](https://badge.fury.io/rb/jekyll-feed)
+[![Continuous Integration](https://github.com/bautisflow/jekyll-atom-feed/actions/workflows/ruby.yml/badge.svg)](https://github.com/bautisflow/jekyll-atom-feed/actions/workflows/ruby.yml) [![Gem Version](https://badge.fury.io/rb/jekyll-atom-feed.svg)](https://badge.fury.io/rb/jekyll-atom-feed)
 
 ## Installation
 
 Add this line to your site's Gemfile:
 
 ```ruby
-gem 'jekyll-feed'
+gem 'jekyll-atom-feed'
 ```
 
 And then add this line to your site's `_config.yml`:
 
 ```yml
 plugins:
-  - jekyll-feed
+  - jekyll-atom-feed
 ```
 
 :warning: If you are using Jekyll < 3.5.0 use the `gems` key instead of `plugins`.
@@ -34,9 +34,20 @@ The plugin will automatically use any of the following configuration variables, 
 * `url` - The URL to your site, e.g., `https://example.com`. If none is provided, the plugin will try to use `site.github.url`.
 * `author` - Global author information (see below)
 
+If you want to enrich your feed for [Feedly](https://feedly.com), create the following object with any of these optional values:
+```yml
+webfeeds:
+  icon: # path to a 96x96 favicon
+  logo: # path to a 30px height svg
+  cover: # path to a large 16:9 banner image
+  accent_color: # hex colour without the hash
+  related: # true = show other stories from your feed under yours
+  analytics: # Google Analytics UA-x tracking ID
+```
+
 ### Already have a feed path?
 
-Do you already have an existing feed someplace other than `/feed.xml`, but are on a host like GitHub Pages that doesn't support machine-friendly redirects? If you simply swap out `jekyll-feed` for your existing template, your existing subscribers won't continue to get updates. Instead, you can specify a non-default path via your site's config.
+Do you already have an existing feed someplace other than `/feed.xml`, but are on a host like GitHub Pages that doesn't support machine-friendly redirects? If you simply swap out `jekyll-atom-feed` for your existing template, your existing subscribers won't continue to get updates. Instead, you can specify a non-default path via your site's config.
 
 ```yml
 feed:
@@ -137,6 +148,15 @@ Jekyll's `smartify` filter uses [kramdown](https://kramdown.gettalong.org/option
 ### Custom styling
 
 Want to style what your feed looks like in the browser? When a XSLT Styleheet file named `feed.xslt.xml` exists at the root of your repository, a link to this stylesheet is added to the generated feed.
+
+### Custom source template
+
+You can specify your own source `feed.xml` if you like to modify the content of the generated feed. Simply define a template path to your xml source file:
+
+```yaml
+feed:
+  template: _layouts/feed.xml
+```
 
 ## Why Atom, and not RSS?
 
@@ -258,7 +278,7 @@ feed:
 
 ## Contributing
 
-1. Fork it (https://github.com/jekyll/jekyll-feed/fork)
+1. Fork it (https://github.com/bautisflow/jekyll-atom-feed/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

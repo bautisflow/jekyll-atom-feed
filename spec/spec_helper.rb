@@ -4,7 +4,7 @@ require "jekyll"
 require "typhoeus" unless Gem.win_platform?
 require "nokogiri"
 require "rss"
-require File.expand_path("../lib/jekyll-feed", __dir__)
+require File.expand_path("../lib/jekyll-atom-feed", __dir__)
 
 Jekyll.logger.log_level = :error
 

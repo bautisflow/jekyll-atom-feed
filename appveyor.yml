@@ -24,4 +24,4 @@ test_script:
 
 cache:
   # If one of the files after the right arrow changes, cache will be invalidated
-  - 'vendor\bundle -> appveyor.yml, Gemfile, jekyll-feed.gemspec'
+  - 'vendor\bundle -> appveyor.yml, Gemfile, jekyll-atom-feed.gemspec'

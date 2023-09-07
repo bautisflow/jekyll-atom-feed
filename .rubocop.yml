@@ -25,7 +25,7 @@ Naming/InclusiveLanguage:
   Enabled: false
 Naming/MemoizedInstanceVariableName:
   Exclude:
-    - lib/jekyll-feed/page-without-a-file.rb
+    - lib/jekyll-atom-feed/page-without-a-file.rb
 
 Performance/MapCompact:
   Enabled: true

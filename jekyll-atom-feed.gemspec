@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "lib/jekyll-feed/version"
+require_relative "lib/jekyll-atom-feed/version"
 
 Gem::Specification.new do |spec|
-  spec.name             = "jekyll-feed"
+  spec.name             = "jekyll-atom-feed"
   spec.version          = Jekyll::Feed::VERSION
-  spec.authors          = ["Ben Balter"]
-  spec.email            = ["ben.balter@github.com"]
+  spec.authors          = ["Jaime Bautista"]
+  spec.email            = ["bautisflow@github.com"]
   spec.summary          = "A Jekyll plugin to generate an Atom feed of your Jekyll posts"
-  spec.homepage         = "https://github.com/jekyll/jekyll-feed"
+  spec.homepage         = "https://github.com/bautisflow/jekyll-atom-feed"
   spec.license          = "MIT"
 
   spec.files            = Dir["lib/**/*"]

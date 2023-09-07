@@ -1,30 +1,50 @@
 name: Release Gem
 
 on:
+  workflow_dispatch:
   push:
-    branches: ["master"]
-    paths: ["lib/**/version.rb"]
+    branches: ["main"]
+    #paths: ["lib/**/version.rb"]
 
 jobs:
   release:
-    if: "github.repository_owner == 'jekyll'"
+    #if: "github.repository_owner == 'jekyll'"
     name: "Release Gem (Ruby ${{ matrix.ruby_version }})"
     runs-on: "ubuntu-latest"
-    strategy:
-      fail-fast: true
-      matrix:
-        ruby_version: ["2.7"]
+    permissions:
+      packages: write
+      contents: read
+
     steps:
+
       - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: actions/checkout@v4
+
+      - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby_version }}
-          bundler-cache: true
-      - name: Build and Publish Gem
-        uses: ashmaroli/release-gem@dist
-        with:
-          gemspec_name: "jekyll-feed"
+          ruby-version: '2.6'
+      - run: bundle install
+
+      - name: Build and publish gem
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:github: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
         env:
-          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_GEM_PUSH_API_KEY }}
+          GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
+          OWNER: ${{ github.repository_owner }}
+
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
