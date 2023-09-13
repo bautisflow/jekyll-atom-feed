@@ -1,6 +1,14 @@
 ## HEAD
 
-## 0.18.0 / 2023-09-17
+## 0.19.0 / 2023-09-13
+
+### Minor Enhancements
+
+  * Remove Webfeeds as they dont even use it for their blog feed
+
+## 0.18.0 / 2023-09-07
+
+### Minor Enhancements
 
   * Integrate Webfeeds for better Feedly integration
   * Provide a template configuration option to overwrite feed.xml template
